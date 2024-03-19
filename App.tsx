@@ -44,8 +44,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   footer: {
-    height: 80,
-    backgroundColor: '#f3f3f3',
+    height: 60,
+    backgroundColor: '#F9F9F6',
     paddingBottom: 0, 
     display: 'flex', 
     justifyContent: 'center',

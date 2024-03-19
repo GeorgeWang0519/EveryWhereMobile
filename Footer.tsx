@@ -1,10 +1,29 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableHighlight } from 'react-native';
-
+import Icon from 'react-native-vector-icons/AntDesign';
 interface FooterProps {
   onNavigate: (destination: string) => void;
 }
-
+const renderIcon = (buttonName: string) => {
+    let iconName;
+    switch (buttonName) {
+      case 'Home':
+        iconName = 'home';
+        break;
+      case 'Discovery':
+        iconName = 'find';
+        break;
+      case 'Orders':
+        iconName = 'isv';
+        break;
+      case 'Profile':
+        iconName = 'user';
+        break;
+      default:
+        return null; 
+    }
+    return <Icon name={iconName} size={20} style={styles.icon} />;
+  };
 const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   const [activeButton, setActiveButton] = useState<string | null>(null);
 
@@ -32,12 +51,15 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           onPressIn={() => handlePressIn(buttonName)}
           onPressOut={handlePressOut}
           onPress={() => onNavigate(buttonName)}
-          underlayColor="#DDD" // 按下时的颜色反馈
+          underlayColor="#D5FF98" 
           style={buttonName === 'Add' ? styles.circleButton : getButtonStyle(buttonName)}
         >
-          <Text style={buttonName === 'Add' ? styles.circleButtonText : getTextStyle(buttonName)}>
+          <View style={buttonName !== 'Add' ? styles.iconContainer : {}}>
+            {buttonName !== 'Add' && renderIcon(buttonName)}
+            <Text style={buttonName === 'Add' ? styles.circleButtonText : getTextStyle(buttonName)}>
             {buttonName === 'Add' ? '+' : buttonName}
-          </Text>
+           </Text>
+          </View>
         </TouchableHighlight>
       ))}
     </View>
@@ -51,31 +73,44 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
     height: 60,
-    backgroundColor: '#f3f3f3',
+    backgroundColor: '#F9F9F6',
     position: 'relative',
+    fontSize:14,
   },
   button: {
     alignItems: 'center',
+    width: 82,
   },
   activeButton: {
     alignItems: 'center',
-    
   },
   text: {
     fontSize: 14,
+    textAlign: 'center', 
+    fontWeight:"800",
   },
   activeText: {
-    fontSize: 16, // 放大文字
-    fontWeight: 'bold', // 加粗
+    fontSize:18,
+    width: 82,
+    textAlign: 'center',
+  },
+  iconContainer: {
+    alignItems: 'center',
+  },
+  icon: {
+    marginBottom: 5,
   },
   circleButton: {
     width: 80,
     height: 80,
     borderRadius: 55,
-    backgroundColor: '#f3f3f3',
+    backgroundColor: '#F2F95E',
     justifyContent: 'center',
     alignItems: 'center',
     bottom: 30,
+    borderWidth: 8,
+    borderColor: '#F9F9F6', 
+    borderStyle: 'solid', 
   },
   circleButtonText: {
     fontSize: 40,
