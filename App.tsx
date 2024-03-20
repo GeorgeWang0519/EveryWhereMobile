@@ -2,7 +2,7 @@
 import React from 'react';
 import { SafeAreaView, View, Text, StyleSheet } from 'react-native';
 import Footer from './Footer';
-
+import Header from './Header';
 const App: React.FC = () => {
   // Define a function to handle navigation requests from the Footer
   const handleNavigate = (destination: string) => {
@@ -13,7 +13,7 @@ const App: React.FC = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.text}>Header</Text>
+        <Header/>
       </View>
       <View style={styles.content}>
         <Text style={styles.text}>Content Area</Text>
